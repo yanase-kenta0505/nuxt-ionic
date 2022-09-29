@@ -8,7 +8,15 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@capacitor/cli": "4.3.0",
     "nuxt": "3.0.0-rc.11",
     "nuxt-ionic": "^0.7.0"
+  },
+  "dependencies": {
+    "@capacitor/app": "4.0.1",
+    "@capacitor/core": "4.3.0",
+    "@capacitor/haptics": "4.0.1",
+    "@capacitor/keyboard": "4.0.1",
+    "@capacitor/status-bar": "4.0.1"
   }
 }
