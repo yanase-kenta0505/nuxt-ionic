@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "nuxt.ionic.app",
   "appName": "nuxt-ionic-project",
   "webDir": "dist",
   "bundledWebRuntime": false
