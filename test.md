@@ -8,4 +8,5 @@
 参考資料  
 https://qiita.com/tatmius/items/f28369bb8d10324f6b7b  
 https://github.com/nuxt/framework/issues/2874  
+https://github.com/aws-amplify/amplify-js/issues/9671 ←これが最有力
 
