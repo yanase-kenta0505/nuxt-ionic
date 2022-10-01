@@ -21,6 +21,6 @@
     "@capacitor/ios": "^4.3.0",
     "@capacitor/keyboard": "4.0.1",
     "@capacitor/status-bar": "4.0.1",
-    "aws-amplify": "^4.3.36"
+    "aws-amplify": "^4.3.37"
   }
 }
