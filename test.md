@@ -9,4 +9,33 @@
 https://qiita.com/tatmius/items/f28369bb8d10324f6b7b  
 https://github.com/nuxt/framework/issues/2874  
 https://github.com/aws-amplify/amplify-js/issues/9671 ←これが最有力
+```
+@ashokgelal I have solved the problem with global by setting up vite config in nuxt.config.js.
+I've tested basic functionality like logging in, signup and useAuthenticator, everything looks fine.
+
+vite: {
+        resolve: {
+            alias: [
+                {find: './runtimeConfig', replacement: './runtimeConfig.browser'}
+            ]
+        },
+        define: {
+            global: {}
+        }
+    }
+Amplify plugin amplify.ts
+
+import AmplifyVue from '@aws-amplify/ui-vue';
+import '@aws-amplify/ui-vue/styles.css';
+
+export default defineNuxtPlugin(nuxtApp => {
+  if (process.client) {
+    window.global = window;
+    var exports = {};
+  }
+  
+  nuxtApp.vueApp.use(AmplifyVue)
+  
+})
+```
 
