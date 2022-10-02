@@ -1,10 +1,23 @@
 <script setup>
+  import { Auth, API, graphqlOperation } from 'aws-amplify'
+  import { createTodo } from '~~/src/graphql/mutations';
   const taskname = ref('')
   const description = ref('')
-  const addTask = () => {
-    console.log('test')
+  const addTask = async() => {
+    const auth = await Auth.currentAuthenticatedUser()
+    console.log(auth.username)
+    const input = {
+      "name": taskname.value,
+      "description": description.value,
+      "owner": auth.username
+    }
+
+    await API.graphql(graphqlOperation(createTodo, {input}))
+
+    taskname.value = ''
+    description.value = ''
+
   }
-  
 </script>
 
 <template>
