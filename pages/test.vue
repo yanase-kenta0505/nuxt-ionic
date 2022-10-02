@@ -1,5 +1,10 @@
 <script setup>
-  import { useIonRouter } from '@ionic/vue';
+  const taskname = ref('')
+  const description = ref('')
+  const addTask = () => {
+    console.log('test')
+  }
+  
 </script>
 
 <template>
@@ -15,13 +20,13 @@
     <ion-content>
       <ion-item>
         <ion-label>タスク名</ion-label>
-        <ion-input />
+        <ion-input v-model="taskname" />
       </ion-item>
       <ion-item>
         <ion-label>説明</ion-label>
-        <ion-input />
+        <ion-input v-model="description" />
       </ion-item>
-      <ion-button expand="block" class="ion-margin-top">追加</ion-button>
+      <ion-button expand="block" class="ion-margin-top" @click="addTask">追加</ion-button>
     </ion-content>
   </ion-page>
 </template>
