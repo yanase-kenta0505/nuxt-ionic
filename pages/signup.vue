@@ -1,5 +1,7 @@
 <script setup>
   import { Auth } from 'aws-amplify';
+  import { useIonRouter } from '@ionic/vue';
+  const ionRouter = useIonRouter()
 
   const username = ref('')
   const password = ref('')
@@ -17,6 +19,7 @@
           enabled: true
         }
       }) 
+      ionRouter.push('/confirmSignup')
       console.log(user)
     } catch (error) {
       console.log('error')
