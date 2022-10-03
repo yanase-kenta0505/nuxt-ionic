@@ -2,15 +2,16 @@
 import { Auth, API, graphqlOperation } from 'aws-amplify'
 import { createTodo } from '~~/src/graphql/mutations';
 import { useIonRouter } from '@ionic/vue';
+import { listTodos } from '~~/src/graphql/queries'
 definePageMeta({
   middleware: ['auth']
 })
 const ionRouter = useIonRouter()
 const taskname = ref('')
 const description = ref('')
+const todoList = ref([])
 const addTask = async () => {
   const auth = await Auth.currentAuthenticatedUser()
-  console.log(auth.username)
   const input = {
     "name": taskname.value,
     "description": description.value,
@@ -31,6 +32,11 @@ const signOut = async () => {
     console.log(error)
   }
 }
+
+(async() => {
+  const todos = await API.graphql(graphqlOperation(listTodos))
+  todoList.value = todos.data.listTodos.items
+})()
 </script>
   
 <template>
@@ -53,6 +59,11 @@ const signOut = async () => {
         <ion-input v-model="description" />
       </ion-item>
       <ion-button expand="block" class="ion-margin-top" @click="addTask">追加</ion-button>
+      <ion-list>
+        <ion-item v-for="todo in todoList" :key="todo.id">
+          {{todo.name}}
+        </ion-item>
+      </ion-list>
       <ion-button expand="block" class="ion-margin-top" color="danger" @click="signOut">ログアウト</ion-button>
     </ion-content>
   </ion-page>

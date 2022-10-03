@@ -200,6 +200,22 @@ export type ListTodosQuery = {
   } | null,
 };
 
+export type OnCrateByOwnernameSubscriptionVariables = {
+  owner: string,
+};
+
+export type OnCrateByOwnernameSubscription = {
+  onCrateByOwnername?:  {
+    __typename: "Todo",
+    id: string,
+    name: string,
+    description?: string | null,
+    owner: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type OnCreateTodoSubscription = {
   onCreateTodo?:  {
     __typename: "Todo",

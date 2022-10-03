@@ -8,3 +8,8 @@ type Todo @model {
   description: String
   owner: String!
 }
+
+type Subscription {
+  onCrateByOwnername(owner: String!) : Todo
+    @aws_subscribe(mutations: ["createTodo"])
+}
