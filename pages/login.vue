@@ -13,7 +13,7 @@
         "username": username.value,
         "password": password.value,
       }) 
-      ionRouter.push('/test')
+      ionRouter.push('/')
     } catch (error) {
       console.log('error')
     }

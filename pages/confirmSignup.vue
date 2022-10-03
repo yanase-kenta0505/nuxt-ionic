@@ -8,7 +8,7 @@
     try {
       await Auth.confirmSignUp(username.value, confirmCode.value)
       console.log('ok')
-      ionRouter.push('/test')
+      ionRouter.push('/')
     } catch (error) {
       console.log(error)
     }
