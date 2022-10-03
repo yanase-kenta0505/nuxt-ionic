@@ -1,6 +1,8 @@
 <script setup>
 import { Auth, API, graphqlOperation } from 'aws-amplify'
 import { createTodo } from '~~/src/graphql/mutations';
+import { useIonRouter } from '@ionic/vue';
+const ionRouter = useIonRouter()
 const taskname = ref('')
 const description = ref('')
 const addTask = async () => {
@@ -17,6 +19,17 @@ const addTask = async () => {
   taskname.value = ''
   description.value = ''
 
+}
+
+const signOut = async() => {
+  try {
+    await Auth.signOut()
+    console.log('signoutしたよ')
+    ionRouter.push('/login')
+  } catch (error) {
+    console.log(error)
+  }
+  
 }
 </script>
 

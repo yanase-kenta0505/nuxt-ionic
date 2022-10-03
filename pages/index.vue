@@ -1,9 +1,19 @@
 <script setup>
-  import { arrowForwardCircle } from 'ionicons/icons';
-  import { useIonRouter } from '@ionic/vue';
+import { arrowForwardCircle } from 'ionicons/icons';
+import { useIonRouter } from '@ionic/vue';
+import { Auth } from 'aws-amplify';
 
-  const ionRouter = useIonRouter()
-  const moveToTest = () => ionRouter.push('/test')
+(async () => {
+  try {
+    const auth = await Auth.currentUserInfo()
+    console.log(auth.username)
+  } catch (error) {
+    console.log(error)
+  }
+})()
+
+const ionRouter = useIonRouter()
+const moveToTest = () => ionRouter.push('/test')
 </script>
 
 

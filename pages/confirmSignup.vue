@@ -1,11 +1,14 @@
 <script setup>
   import { Auth } from 'aws-amplify'
+  import { useIonRouter } from '@ionic/vue';
   const username = ref('')
   const confirmCode = ref()
+  const ionRouter = useIonRouter()
   const confirmSignup = async () => {
     try {
       await Auth.confirmSignUp(username.value, confirmCode.value)
       console.log('ok')
+      ionRouter.push('/test')
     } catch (error) {
       console.log(error)
     }
