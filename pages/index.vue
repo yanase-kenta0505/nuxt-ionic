@@ -1,8 +1,13 @@
-<script setup>
+<script setup lang="ts">
 import { Auth, API, graphqlOperation } from 'aws-amplify'
 import { createTodo } from '~~/src/graphql/mutations';
 import { useIonRouter } from '@ionic/vue';
 import { listTodos } from '~~/src/graphql/queries'
+import { onCrateByOwnername } from '~~/src/graphql/subscriptions' 
+import { OnCrateByOwnernameSubscription, Todo } from '~~/src/API'
+type OnCrateByOwnernameSubscriptionEvent = {
+    value: { data: OnCrateByOwnernameSubscription }
+};
 definePageMeta({
   middleware: ['auth']
 })
@@ -34,8 +39,27 @@ const signOut = async () => {
 }
 
 (async() => {
+  const auth = await Auth.currentAuthenticatedUser()
   const todos = await API.graphql(graphqlOperation(listTodos))
-  todoList.value = todos.data.listTodos.items
+  if("data" in todos) {
+    todoList.value = todos.data.listTodos.items
+    const subscription = await API.graphql(graphqlOperation(onCrateByOwnername, {"owner": auth.username}))
+  try {
+    if("subscribe" in subscription) {
+      subscription.subscribe({
+        next: ({value: {data}}: OnCrateByOwnernameSubscriptionEvent) => {
+          if (data.onCrateByOwnername) {
+            const todo: Todo = data.onCrateByOwnername
+            console.log(todo)
+          }
+        }
+      })
+  }
+  } catch (error) {
+    console.log(error)
+  }
+  }
+  
 })()
 </script>
   
