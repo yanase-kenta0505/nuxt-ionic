@@ -22,6 +22,8 @@
     password.value = ''
     email.value = ''
   }
+
+  const toSignUp = () => ionRouter.push('/signup')
 </script>
 
 <template>
@@ -41,6 +43,7 @@
         <ion-input v-model="password" />
       </ion-item>
       <ion-button expand="block" class="ion-margin-top" @click="login">ログイン</ion-button>
+      <ion-button expand="block" class="ion-margin-top" @click="toSignUp" color="success">サインアップ画面へ</ion-button>
     </ion-content>
   </ion-page>
 </template>

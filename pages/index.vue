@@ -40,7 +40,15 @@ const signOut = async () => {
 
 (async() => {
   const auth = await Auth.currentAuthenticatedUser()
-  const todos = await API.graphql(graphqlOperation(listTodos))
+  console.log(auth.username)
+
+  const todos = await API.graphql(graphqlOperation(listTodos, 
+  {"filter": {
+    "owner":{
+      "contains": auth.username
+    }
+  }}
+  ))
   if("data" in todos) {
     todoList.value = todos.data.listTodos.items
     const subscription = await API.graphql(graphqlOperation(onCrateByOwnername, {"owner": auth.username}))
@@ -50,7 +58,7 @@ const signOut = async () => {
         next: ({value: {data}}: OnCrateByOwnernameSubscriptionEvent) => {
           if (data.onCrateByOwnername) {
             const todo: Todo = data.onCrateByOwnername
-            console.log(todo)
+            todoList.value.push(todo)
           }
         }
       })
